@@ -1,6 +1,6 @@
 # Nero 强化学习策略实物抖动：辨识、定位与修复
 
-这份案例记录 2026 年 10 月在七关节 Nero 末端跟踪任务中，从数据采集到策略重训、限位保护和实物部署的排查过程。它是一份可复用的工程流程，不提供可直接使能其他机械臂的控制程序。实际训练和部署代码已归档在本机 `WBC_nero_final/`；本文给出代码入口、关键参数和证据边界。
+这份案例记录 2026 年 10 月在七关节 Nero 末端跟踪任务中，从数据采集到策略重训、限位保护和实物部署的排查过程。仓库同时收录了最终训练与实物部署代码、两份 checkpoint、导出策略、辨识结果和机器人模型，集中放在 [`WBC_nero_final/`](WBC_nero_final/README.md)。本文给出流程、关键参数和证据边界。
 
 ## 一页流程
 
@@ -23,6 +23,17 @@
 - [02 抖动定位与策略修复](docs/02-policy-jitter.md)：如何区分 PD/时序与 actor 自主反向；最终训练改动。
 - [03 验证与迁移检查](docs/03-validation.md)：逐层验收、限位事件与部署注意事项。
 - [`data/gain-delay-20261023.csv`](data/gain-delay-20261023.csv)：最终部署使用的逐轴拟合摘要。
+- [`WBC_nero_final/`](WBC_nero_final/README.md)：可迁移训练与键盘/自动采样部署包。
+
+## 下载和核对
+
+```bash
+git clone https://github.com/lmr07/nero-rl-jitter-playbook.git
+cd nero-rl-jitter-playbook/WBC_nero_final
+bash verify_bundle.sh
+```
+
+迁移包约 143 MB，其中包含 checkpoint 和网格模型；GitHub 网页上的 **Download ZIP** 也可下载，但 Git 克隆便于后续更新。安装依赖、仿真可视化、离线部署测试与实物入口见[迁移包说明](WBC_nero_final/README.md)。克隆和校验不会连接 CAN 或使能电机。
 
 ## 此次结果及范围
 
@@ -32,7 +43,7 @@
 
 ## 代码入口与溯源
 
-若同时持有本机迁移包 `WBC_nero_final/`：
+本仓库 `WBC_nero_final/` 内：
 
 | 用途 | 包内路径 |
 |---|---|
