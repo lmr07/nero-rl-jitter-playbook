@@ -1,0 +1,1094 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- 合并A2和Nero机器人URDF，Nero原点偏移至A2坐标系(0,0,0.092) -->
+<robot name="a2_nero_combined">
+  <!-- ===================== A2机器人描述（保留完整原配置）===================== -->
+  <!-- <link name="world"></link> -->
+  
+  <!-- A2浮动基座关节 -->
+  <!-- <joint name="floating_base_joint" type="floating">
+    <parent link="world" />
+    <child link="base_link" />
+  </joint>  -->
+  
+  <!-- A2基座链接 -->
+  <link name="base_link">
+    <inertial>
+      <origin xyz="6.982591E-03 -0.712858E-03 12.889523E-03" rpy="0 0 0" />
+      <mass value="19.651" />
+      <inertia ixx="141775328.248061E-09" ixy="400505.020171E-09" ixz="-6996487.718114E-09"
+               iyy="407724601.564754E-09" iyz="-361858.857563E-09" izz="472247985.516800E-09" />
+    </inertial>
+    <visual>
+      <origin xyz="0 0 0" rpy="0 0 0" />
+      <geometry>
+        <mesh filename="../a2-meshes/base_link.STL" />
+      </geometry>
+      <material name="">
+        <color rgba="0.792156862745098 0.819607843137255 0.933333333333333 1" />
+      </material>
+    </visual>
+    <collision>
+      <origin xyz="0 0 0.007" rpy="0 0 0" />
+      <geometry>
+        <box size="0.24 0.28 0.17" />
+      </geometry>
+    </collision>
+    <collision>
+      <origin xyz="0.25 0 0.119" rpy="0.0 0 0.0" />
+      <geometry>
+        <box size="0.08 0.05 0.02" />
+      </geometry>
+    </collision>
+    <collision>
+      <origin xyz="-0.22 0 0.119" rpy="-0.0 -0.03 0.0" />
+      <geometry>
+        <box size="0.05 0.03 0.016" />
+      </geometry>
+    </collision>
+    <collision>
+      <origin xyz="0.365 0 0.1" rpy="0 -0.7 0" />
+      <geometry>
+        <box size="0.06 0.1 0.01" />
+      </geometry>
+    </collision>
+    <collision>
+      <origin xyz="-0.31 0 0.112" rpy="0 0.7 0" />
+      <geometry>
+        <box size="0.045 0.1 0.01" />
+      </geometry>
+    </collision>
+  </link>
+
+  <!-- A2左前腿 - 髋部 -->
+  <link name="FL_hip">
+    <inertial>
+      <origin xyz="-2.408E-03 -16.220E-03 0.239E-03" rpy="0 0 0" />
+      <mass value="1.620" />
+      <inertia ixx="1476.261E-06" ixy="53.160E-06" ixz="-7.425E-06"
+               iyy="1633.309E-06" iyz="-21.032E-06" izz="1630.804E-06" />
+    </inertial>
+    <visual>
+      <origin xyz="0 0 0" rpy="0 0 0" />
+      <geometry>
+        <mesh filename="../a2-meshes/left_front_Link1.STL" />
+      </geometry>
+      <material name="">
+        <color rgba="0.898039215686275 0.917647058823529 0.929411764705882 1" />
+      </material>
+    </visual>
+  </link>
+  <joint name="FL_hip_joint" type="revolute">
+    <origin xyz="0.25944 0.075113 0" rpy="0 0 0" />
+    <parent link="base_link" />
+    <child link="FL_hip" />
+    <axis xyz="1 0 0" />
+    <limit lower="-1.01" upper="1.01" effort="120.0" velocity="22.0" />
+  </joint>
+
+  <!-- A2左前腿 - 大腿 -->
+  <link name="FL_thigh">
+    <inertial>
+      <origin xyz="-3.268E-03 -31.110E-03 -53.896E-03" rpy="0 0 0" />
+      <mass value="3.079" />
+      <inertia ixx="29271.794E-06" ixy="337.285E-06" ixz="-1251.409E-06"
+               iyy="26828.777E-06" iyz="5283.783E-06" izz="5121.720E-06" />
+    </inertial>
+    <visual>
+      <origin xyz="0 0 0" rpy="0 0 0" />
+      <geometry>
+        <mesh filename="../a2-meshes/left_front_Link2.STL" />
+      </geometry>
+      <material name="">
+        <color rgba="0.898039215686275 0.917647058823529 0.929411764705882 1" />
+      </material>
+    </visual>
+    <!-- <collision>
+      <origin xyz="0.0 -0.04 0" rpy="1.571 0 0" />
+      <geometry>
+        <cylinder radius="0.048" length="0.12" />
+      </geometry>
+    </collision> -->
+    <collision>
+      <origin xyz="-0.025 0.00 -0.09" rpy="0 0.01 0" />
+      <geometry>
+        <box size="0.055 0.036 0.17" />
+      </geometry>
+    </collision>
+    <collision>
+      <origin xyz="-0.022 0.00 -0.27" rpy="0 -0.75 0" />
+      <geometry>
+        <box size="0.017 0.05 0.05" />
+      </geometry>
+    </collision>
+  </link>
+  <joint name="FL_thigh_joint" type="revolute">
+    <origin xyz="0 0.12779 0" rpy="0 0 0" />
+    <parent link="FL_hip" />
+    <child link="FL_thigh" />
+    <axis xyz="0 1 0" />
+    <limit lower="-2.34" upper="3.15" effort="120.0" velocity="22.0" />
+  </joint>
+
+  <!-- A2左前腿 - 小腿 -->
+  <link name="FL_calf">
+    <inertial>
+      <origin xyz="12.515E-03 -0.024E-03 -117.649E-03" rpy="0 0 0" />
+      <mass value="0.361" />
+      <inertia ixx="3869.035E-06" ixy="-0.093E-06" ixz="298.636E-06"
+               iyy="3945.295E-06" iyz="0.826E-06" izz="150.991E-06" />
+    </inertial>
+    <visual>
+      <origin xyz="0 0 0" rpy="0 0 0" />
+      <geometry>
+        <mesh filename="../a2-meshes/left_front_Link3.STL" />
+      </geometry>
+      <material name="">
+        <color rgba="0.898039215686275 0.917647058823529 0.929411764705882 1" />
+      </material>
+    </visual>
+    <collision>
+      <origin xyz="0.018 -0.00 -0.08" rpy="0 -0.24 0" />
+      <geometry>
+        <box size="0.024 0.03 0.1" />
+      </geometry>
+    </collision>
+    <collision>
+      <origin xyz="0.033 -0.00 -0.17" rpy="0 -0.03 0" />
+      <geometry>
+        <box size="0.022 0.03 0.08" />
+      </geometry>
+    </collision>
+    <collision>
+      <origin xyz="0.029 -0.00 -0.236" rpy="0 0.2 0" />
+      <geometry>
+        <box size="0.02 0.036 0.06" />
+      </geometry>
+    </collision>
+    <collision>
+      <origin xyz="0.008 -0.00 -0.23" rpy="0 0.68 0" />
+      <geometry>
+        <box size="0.01 0.036 0.06" />
+      </geometry>
+    </collision>
+  </link>
+  <joint name="FL_calf_joint" type="revolute">
+    <origin xyz="0 0 -0.275" rpy="0 0 0" />
+    <parent link="FL_thigh" />
+    <child link="FL_calf" />
+    <axis xyz="0 1 0" />
+    <limit lower="-2.77" upper="-0.54" effort="180.0" velocity="14.6667" />
+  </joint>
+
+  <!-- A2左前腿 - 足部 -->
+  <link name="FL_foot">
+    <inertial>
+      <origin xyz="-7.846E-03 0.012E-03 -9.403E-03" rpy="0 0 0" />
+      <mass value="0.046" />
+      <inertia ixx="13.994E-06" ixy="-0.003E-06" ixz="3.992E-06"
+               iyy="14.434E-06" iyz="-0.004E-06" izz="15.404E-06" />
+    </inertial>
+    <visual>
+      <origin xyz="0 0 0" rpy="0 0 0" />
+      <geometry>
+        <mesh filename="../a2-meshes/left_front_Link4.STL" />
+      </geometry>
+      <material name="">
+        <color rgba="0.698039215686274 0.698039215686274 0.698039215686274 1" />
+      </material>
+    </visual>
+    <collision>
+      <origin xyz="0.0 -0.00 -0.0" rpy="0 0 0" />
+      <geometry>
+        <sphere radius="0.032" />
+      </geometry>
+    </collision>
+  </link>
+  <joint name="FL_foot_joint" type="fixed" dont_collapse="true">
+    <origin xyz="0 0 -0.275" rpy="0 0 0" />
+    <parent link="FL_calf" />
+    <child link="FL_foot" />
+    <axis xyz="0 0 0" />
+  </joint>
+
+  <!-- A2左后腿（省略重复结构，保持与原文件一致）-->
+  <link name="RL_hip">
+    <inertial>
+      <origin xyz="3.270E-03 -16.220E-03 -0.097E-03" rpy="0 0 0" />
+      <mass value="1.620" />
+      <inertia ixx="1468.092E-06" ixy="-105.396E-06" ixz="-7.294E-06"
+               iyy="1625.457E-06" iyz="-0.444E-06" izz="1631.122E-06" />
+    </inertial>
+    <visual>
+      <origin xyz="0 0 0" rpy="0 0 0" />
+      <geometry>
+        <mesh filename="../a2-meshes/left_hind_Link1.STL" />
+      </geometry>
+      <material name="">
+        <color rgba="0.898039215686275 0.917647058823529 0.929411764705882 1" />
+      </material>
+    </visual>
+  </link>
+  <joint name="RL_hip_joint" type="revolute">
+    <origin xyz="-0.25944 0.075113 0" rpy="0 0 0" />
+    <parent link="base_link" />
+    <child link="RL_hip" />
+    <axis xyz="1 0 0" />
+    <limit lower="-1.01" upper="1.01" effort="120.0" velocity="22.0" />
+  </joint>
+
+  <link name="RL_thigh">
+    <inertial>
+      <origin xyz="-3.268E-03 -31.110E-03 -53.896E-03" rpy="0 0 0" />
+      <mass value="3.079" />
+      <inertia ixx="29271.794E-06" ixy="337.285E-06" ixz="-1251.409E-06"
+               iyy="26828.777E-06" iyz="5283.783E-06" izz="5121.720E-06" />
+    </inertial>
+    <visual>
+      <origin xyz="0 0 0" rpy="0 0 0" />
+      <geometry>
+        <mesh filename="../a2-meshes/left_hind_Link2.STL" />
+      </geometry>
+      <material name="">
+        <color rgba="0.898039215686275 0.917647058823529 0.929411764705882 1" />
+      </material>
+    </visual>
+    <!-- <collision>
+      <origin xyz="0.0 -0.04 0" rpy="1.571 0 0" />
+      <geometry>
+        <cylinder radius="0.048" length="0.12" />
+      </geometry>
+    </collision> -->
+    <collision>
+      <origin xyz="-0.025 0.00 -0.09" rpy="0 0.01 0" />
+      <geometry>
+        <box size="0.055 0.036 0.17" />
+      </geometry>
+    </collision>
+    <collision>
+      <origin xyz="-0.022 0.00 -0.27" rpy="0 -0.75 0" />
+      <geometry>
+        <box size="0.017 0.05 0.05" />
+      </geometry>
+    </collision>
+  </link>
+  <joint name="RL_thigh_joint" type="revolute">
+    <origin xyz="0 0.12779 0" rpy="0 0 0" />
+    <parent link="RL_hip" />
+    <child link="RL_thigh" />
+    <axis xyz="0 1 0" />
+    <limit lower="-1.56" upper="3.94" effort="120.0" velocity="22.0" />
+  </joint>
+
+  <link name="RL_calf">
+    <inertial>
+      <origin xyz="12.515E-03 -0.024E-03 -117.649E-03" rpy="0 0 0" />
+      <mass value="0.361" />
+      <inertia ixx="3869.035E-06" ixy="-0.093E-06" ixz="298.636E-06"
+               iyy="3945.295E-06" iyz="0.826E-06" izz="150.991E-06" />
+    </inertial>
+    <visual>
+      <origin xyz="0 0 0" rpy="0 0 0" />
+      <geometry>
+        <mesh filename="../a2-meshes/left_hind_Link3.STL" />
+      </geometry>
+      <material name="">
+        <color rgba="0.898039215686275 0.917647058823529 0.929411764705882 1" />
+      </material>
+    </visual>
+    <collision>
+      <origin xyz="0.018 -0.00 -0.08" rpy="0 -0.24 0" />
+      <geometry>
+        <box size="0.024 0.03 0.1" />
+      </geometry>
+    </collision>
+    <collision>
+      <origin xyz="0.033 -0.00 -0.17" rpy="0 -0.03 0" />
+      <geometry>
+        <box size="0.022 0.03 0.08" />
+      </geometry>
+    </collision>
+    <collision>
+      <origin xyz="0.029 -0.00 -0.236" rpy="0 0.2 0" />
+      <geometry>
+        <box size="0.02 0.036 0.06" />
+      </geometry>
+    </collision>
+    <collision>
+      <origin xyz="0.008 -0.00 -0.23" rpy="0 0.68 0" />
+      <geometry>
+        <box size="0.01 0.036 0.06" />
+      </geometry>
+    </collision>
+  </link>
+  <joint name="RL_calf_joint" type="revolute">
+    <origin xyz="0 0 -0.275" rpy="0 0 0" />
+    <parent link="RL_thigh" />
+    <child link="RL_calf" />
+    <axis xyz="0 1 0" />
+    <limit lower="-2.77" upper="-0.54" effort="180.0" velocity="14.6667" />
+  </joint>
+
+  <link name="RL_foot">
+    <inertial>
+      <origin xyz="-7.846E-03 0.012E-03 -9.403E-03" rpy="0 0 0" />
+      <mass value="0.046" />
+      <inertia ixx="13.994E-06" ixy="-0.003E-06" ixz="3.992E-06"
+               iyy="14.434E-06" iyz="-0.004E-06" izz="15.404E-06" />
+    </inertial>
+    <visual>
+      <origin xyz="0 0 0" rpy="0 0 0" />
+      <geometry>
+        <mesh filename="../a2-meshes/left_hind_Link4.STL" />
+      </geometry>
+      <material name="">
+        <color rgba="0.698039215686274 0.698039215686274 0.698039215686274 1" />
+      </material>
+    </visual>
+    <collision>
+      <origin xyz="0.0 -0.00 -0.0" rpy="0 0 0" />
+      <geometry>
+        <sphere radius="0.032" />
+      </geometry>
+    </collision>
+  </link>
+  <joint name="RL_foot_joint" type="fixed" dont_collapse="true">
+    <origin xyz="0 0 -0.275" rpy="0 0 0" />
+    <parent link="RL_calf" />
+    <child link="RL_foot" />
+    <axis xyz="0 0 0" />
+  </joint>
+
+  <!-- A2右前腿（省略重复结构，保持与原文件一致）-->
+  <link name="FR_hip">
+    <inertial>
+      <origin xyz="-2.465E-03 16.220E-03 0.318E-03" rpy="0 0 0" />
+      <mass value="1.620" />
+      <inertia ixx="1483.677E-06" ixy="-56.616E-06" ixz="-5.890E-06"
+               iyy="1632.784E-06" iyz="25.536E-06" izz="1622.864E-06" />
+    </inertial>
+    <visual>
+      <origin xyz="0 0 0" rpy="0 0 0" />
+      <geometry>
+        <mesh filename="../a2-meshes/right_front_Link1.STL" />
+      </geometry>
+      <material name="">
+        <color rgba="0.898039215686275 0.917647058823529 0.929411764705882 1" />
+      </material>
+    </visual>
+  </link>
+  <joint name="FR_hip_joint" type="revolute">
+    <origin xyz="0.25944 -0.075113 0" rpy="0 0 0" />
+    <parent link="base_link" />
+    <child link="FR_hip" />
+    <axis xyz="1 0 0" />
+    <limit lower="-1.01" upper="1.01" effort="120.0" velocity="22.0" />
+  </joint>
+
+  <link name="FR_thigh">
+    <inertial>
+      <origin xyz="-3.256E-03 31.125E-03 -53.921E-03" rpy="0 0 0" />
+      <mass value="3.077" />
+      <inertia ixx="29255.209E-06" ixy="-334.771E-06" ixz="-1255.239E-06"
+               iyy="26819.094E-06" iyz="-5288.175E-06" izz="5125.147E-06" />
+    </inertial>
+    <visual>
+      <origin xyz="0 0 0" rpy="0 0 0" />
+      <geometry>
+        <mesh filename="../a2-meshes/right_front_Link2.STL" />
+      </geometry>
+      <material name="">
+        <color rgba="0.898039215686275 0.917647058823529 0.929411764705882 1" />
+      </material>
+    </visual>
+    <!-- <collision>
+      <origin xyz="0.0 0.04 0" rpy="1.571 0 0" />
+      <geometry>
+        <cylinder radius="0.048" length="0.12" />
+      </geometry>
+    </collision> -->
+    <collision>
+      <origin xyz="-0.025 0.00 -0.09" rpy="0 0.01 0" />
+      <geometry>
+        <box size="0.055 0.036 0.17" />
+      </geometry>
+    </collision>
+    <collision>
+      <origin xyz="-0.022 0.00 -0.27" rpy="0 -0.75 0" />
+      <geometry>
+        <box size="0.017 0.05 0.05" />
+      </geometry>
+    </collision>
+  </link>
+  <joint name="FR_thigh_joint" type="revolute">
+    <origin xyz="0 -0.12779 0" rpy="0 0 0" />
+    <parent link="FR_hip" />
+    <child link="FR_thigh" />
+    <axis xyz="0 1 0" />
+    <limit lower="-2.34" upper="3.15" effort="120.0" velocity="22.0" />
+  </joint>
+
+  <link name="FR_calf">
+    <inertial>
+      <origin xyz="12.515E-03 0.016E-03 -117.649E-03" rpy="0 0 0" />
+      <mass value="0.361" />
+      <inertia ixx="3869.035E-06" ixy="0.087E-06" ixz="298.636E-06"
+               iyy="3945.295E-06" iyz="-1.285E-06" izz="150.991E-06" />
+    </inertial>
+    <visual>
+      <origin xyz="0 0 0" rpy="0 0 0" />
+      <geometry>
+        <mesh filename="../a2-meshes/right_front_Link3.STL" />
+      </geometry>
+      <material name="">
+        <color rgba="0.898039215686275 0.917647058823529 0.929411764705882 1" />
+      </material>
+    </visual>
+    <collision>
+      <origin xyz="0.018 -0.00 -0.08" rpy="0 -0.24 0" />
+      <geometry>
+        <box size="0.024 0.03 0.1" />
+      </geometry>
+    </collision>
+    <collision>
+      <origin xyz="0.033 -0.00 -0.17" rpy="0 -0.03 0" />
+      <geometry>
+        <box size="0.022 0.03 0.08" />
+      </geometry>
+    </collision>
+    <collision>
+      <origin xyz="0.029 -0.00 -0.236" rpy="0 0.2 0" />
+      <geometry>
+        <box size="0.02 0.036 0.06" />
+      </geometry>
+    </collision>
+    <collision>
+      <origin xyz="0.008 -0.00 -0.23" rpy="0 0.68 0" />
+      <geometry>
+        <box size="0.01 0.036 0.06" />
+      </geometry>
+    </collision>
+  </link>
+  <joint name="FR_calf_joint" type="revolute">
+    <origin xyz="0 0 -0.275" rpy="0 0 0" />
+    <parent link="FR_thigh" />
+    <child link="FR_calf" />
+    <axis xyz="0 1 0" />
+    <limit lower="-2.77" upper="-0.54" effort="180.0" velocity="14.6667" />
+  </joint>
+
+  <link name="FR_foot">
+    <inertial>
+      <origin xyz="-7.846E-03 0.012E-03 -9.403E-03" rpy="0 0 0" />
+      <mass value="0.046" />
+      <inertia ixx="13.994E-06" ixy="-0.003E-06" ixz="3.992E-06"
+               iyy="14.434E-06" iyz="-0.004E-06" izz="15.404E-06" />
+    </inertial>
+    <visual>
+      <origin xyz="0 0 0" rpy="0 0 0" />
+      <geometry>
+        <mesh filename="../a2-meshes/right_front_Link4.STL" />
+      </geometry>
+      <material name="">
+        <color rgba="0.698039215686274 0.698039215686274 0.698039215686274 1" />
+      </material>
+    </visual>
+    <collision>
+      <origin xyz="0.0 -0.00 -0.0" rpy="0 0 0" />
+      <geometry>
+        <sphere radius="0.032" />
+      </geometry>
+    </collision>
+  </link>
+  <joint name="FR_foot_joint" type="fixed" dont_collapse="true">
+    <origin xyz="0 0 -0.275" rpy="0 0 0" />
+    <parent link="FR_calf" />
+    <child link="FR_foot" />
+    <axis xyz="0 0 0" />
+  </joint>
+
+  <!-- A2右后腿（省略重复结构，保持与原文件一致）-->
+  <link name="RR_hip">
+    <inertial>
+      <origin xyz="3.270E-03 16.220E-03 -0.037E-03" rpy="0 0 0" />
+      <mass value="1.620" />
+      <inertia ixx="1464.949E-06" ixy="105.396E-06" ixz="-9.437E-06"
+               iyy="1625.469E-06" iyz="4.282E-06" izz="1634.276E-06" />
+    </inertial>
+    <visual>
+      <origin xyz="0 0 0" rpy="0 0 0" />
+      <geometry>
+        <mesh filename="../a2-meshes/right_hind_Link1.STL" />
+      </geometry>
+      <material name="">
+        <color rgba="0.898039215686275 0.917647058823529 0.929411764705882 1" />
+      </material>
+    </visual>
+  </link>
+  <joint name="RR_hip_joint" type="revolute">
+    <origin xyz="-0.25944 -0.075113 0" rpy="0 0 0" />
+    <parent link="base_link" />
+    <child link="RR_hip" />
+    <axis xyz="1 0 0" />
+    <limit lower="-1.01" upper="1.01" effort="120.0" velocity="22.0" />
+  </joint>
+
+  <link name="RR_thigh">
+    <inertial>
+      <origin xyz="-3.256E-03 31.125E-03 -53.921E-03" rpy="0 0 0" />
+      <mass value="3.077" />
+      <inertia ixx="29255.209E-06" ixy="-334.771E-06" ixz="-1255.239E-06"
+               iyy="26819.094E-06" iyz="-5288.175E-06" izz="5125.147E-06" />
+    </inertial>
+    <visual>
+      <origin xyz="0 0 0" rpy="0 0 0" />
+      <geometry>
+        <mesh filename="../a2-meshes/right_hind_Link2.STL" />
+      </geometry>
+      <material name="">
+        <color rgba="0.898039215686275 0.917647058823529 0.929411764705882 1" />
+      </material>
+    </visual>
+    <!-- <collision>
+      <origin xyz="0.0 0.04 0" rpy="1.571 0 0" />
+      <geometry>
+        <cylinder radius="0.048" length="0.12" />
+      </geometry>
+    </collision> -->
+    <collision>
+      <origin xyz="-0.025 0.00 -0.09" rpy="0 0.01 0" />
+      <geometry>
+        <box size="0.055 0.036 0.17" />
+      </geometry>
+    </collision>
+    <collision>
+      <origin xyz="-0.022 0.00 -0.27" rpy="0 -0.75 0" />
+      <geometry>
+        <box size="0.017 0.05 0.05" />
+      </geometry>
+    </collision>
+  </link>
+  <joint name="RR_thigh_joint" type="revolute">
+    <origin xyz="0 -0.12779 0" rpy="0 0 0" />
+    <parent link="RR_hip" />
+    <child link="RR_thigh" />
+    <axis xyz="0 1 0" />
+    <limit lower="-1.56" upper="3.94" effort="120.0" velocity="22.0" />
+  </joint>
+
+  <link name="RR_calf">
+    <inertial>
+      <origin xyz="12.515E-03 0.016E-03 -117.649E-03" rpy="0 0 0" />
+      <mass value="0.361" />
+      <inertia ixx="3869.035E-06" ixy="0.087E-06" ixz="298.636E-06"
+               iyy="3945.295E-06" iyz="-1.285E-06" izz="150.991E-06" />
+    </inertial>
+    <visual>
+      <origin xyz="0 0 0" rpy="0 0 0" />
+      <geometry>
+        <mesh filename="../a2-meshes/right_hind_Link3.STL" />
+      </geometry>
+      <material name="">
+        <color rgba="0.898039215686275 0.917647058823529 0.929411764705882 1" />
+      </material>
+    </visual>
+    <collision>
+      <origin xyz="0.018 -0.00 -0.08" rpy="0 -0.24 0" />
+      <geometry>
+        <box size="0.024 0.03 0.1" />
+      </geometry>
+    </collision>
+    <collision>
+      <origin xyz="0.033 -0.00 -0.17" rpy="0 -0.03 0" />
+      <geometry>
+        <box size="0.022 0.03 0.08" />
+      </geometry>
+    </collision>
+    <collision>
+      <origin xyz="0.029 -0.00 -0.236" rpy="0 0.2 0" />
+      <geometry>
+        <box size="0.02 0.036 0.06" />
+      </geometry>
+    </collision>
+    <collision>
+      <origin xyz="0.008 -0.00 -0.23" rpy="0 0.68 0" />
+      <geometry>
+        <box size="0.01 0.036 0.06" />
+      </geometry>
+    </collision>
+  </link>
+  <joint name="RR_calf_joint" type="revolute">
+    <origin xyz="0 0 -0.275" rpy="0 0 0" />
+    <parent link="RR_thigh" />
+    <child link="RR_calf" />
+    <axis xyz="0 1 0" />
+    <limit lower="-2.77" upper="-0.54" effort="180.0" velocity="14.6667" />
+  </joint>
+
+  <link name="RR_foot">
+    <inertial>
+      <origin xyz="-7.846E-03 0.012E-03 -9.403E-03" rpy="0 0 0" />
+      <mass value="0.046" />
+      <inertia ixx="13.994E-06" ixy="-0.003E-06" ixz="3.992E-06"
+               iyy="14.434E-06" iyz="-0.004E-06" izz="15.404E-06" />
+    </inertial>
+    <visual>
+      <origin xyz="0 0 0" rpy="0 0 0" />
+      <geometry>
+        <mesh filename="../a2-meshes/right_hind_Link4.STL" />
+      </geometry>
+      <material name="">
+        <color rgba="0.698039215686274 0.698039215686274 0.698039215686274 1" />
+      </material>
+    </visual>
+    <collision>
+      <origin xyz="0.0 -0.00 -0.0" rpy="0 0 0" />
+      <geometry>
+        <sphere radius="0.032" />
+      </geometry>
+    </collision>
+  </link>
+  <joint name="RR_foot_joint" type="fixed" dont_collapse="true">
+    <origin xyz="0 0 -0.275" rpy="0 0 0" />
+    <parent link="RR_calf" />
+    <child link="RR_foot" />
+    <axis xyz="0 0 0" />
+  </joint>
+
+  <!-- ===================== Nero机器人描述（原点偏移至(0,0,0.092)）===================== -->
+  <!-- Nero基座链接（重命名为nero_base_link避免冲突）-->
+  <link name="nero_base_link">
+    <inertial>
+      <origin xyz="-0.00963614954335565 0.00016786624100977 0.044860101664403" rpy="0 0 0"/>
+      <mass value="0.77"/>
+      <inertia ixx="0.0006669" ixy="0.0" ixz="0.0" iyy="0.00054501" iyz="0.0" izz="0.00051509"/>
+    </inertial>
+    <visual>
+      <origin xyz="0 0 0" rpy="0 0 0"/>
+      <geometry>
+        <mesh filename="../nero-meshes/dae/base_link_nero.dae"/>
+      </geometry>
+    </visual>
+    <!-- <collision>
+      <origin xyz="0 0 0" rpy="0 0 0"/>
+      <geometry>
+        <mesh filename="../nero-meshes/base_link_nero.STL"/>
+      </geometry>
+    </collision> -->
+    <!-- <collision>
+      <origin xyz="0.0 0 0.05" rpy="0 0 0" />
+      <geometry>
+        <cylinder radius="0.045" length="0.10" />
+      </geometry>
+    </collision> -->
+  </link>
+
+  <!-- Nero基座关节：连接到世界坐标系，偏移量(0,0,0.092)，各轴平行 -->
+  <joint name="nero_a2_to_base" type="fixed">
+    <parent link="base_link"/>
+    <child link="nero_base_link"/>
+    <origin xyz="0.16 0 0.142" rpy="0 0 3.141"/> <!-- 核心偏移配置 -->
+  </joint>
+
+  <!-- Nero Link1 -->
+  <link name="nero_link1">
+    <inertial>
+      <origin xyz="-0.00077 -0.00006 -0.00686" rpy="0 0 0"/>
+      <mass value="0.77"/>
+      <inertia ixx="0.0006669" ixy="0.0" ixz="0.0" iyy="0.00054501" iyz="0.0" izz="0.00051509"/>
+    </inertial>
+    <visual>
+      <origin xyz="0 0 0" rpy="0 0 0"/>
+      <geometry>
+        <mesh filename="../nero-meshes/dae/link1.dae"/>
+      </geometry>
+    </visual>
+    <!-- <collision>
+      <origin xyz="0 0 0" rpy="0 0 0"/>
+      <geometry>
+        <mesh filename="../nero-meshes/Link1.STL"/>
+      </geometry>
+    </collision> -->
+  </link>
+  <joint name="nero_joint1" type="revolute">
+    <origin xyz="0 0 0.138" rpy="0 0 0"/>
+    <parent link="nero_base_link"/>
+    <child link="nero_link1"/>
+    <axis xyz="0 0 1"/>
+    <limit lower="-2.7" upper="2.7" effort="0" velocity="0"/>
+  </joint>
+
+  <!-- Nero Link2 -->
+  <link name="nero_link2">
+     <inertial>
+      <mass value="0.49"/>
+      <inertia ixx="0.00053808" ixy="0.0" ixz="0.0" iyy="0.00029435" iyz="0.0" izz="0.00040266"/>
+    </inertial>
+    <visual>
+      <origin xyz="0 0 0" rpy="0 0 0"/>
+      <geometry>
+        <mesh filename="../nero-meshes/dae/link2.dae"/>
+      </geometry>
+    </visual>
+    <!-- <collision>
+      <origin xyz="0 0 0" rpy="0 0 0"/>
+      <geometry>
+        <mesh filename="../nero-meshes/Link2.STL"/>
+      </geometry>
+    </collision> -->
+    <!-- <collision>
+      <origin xyz="0.0 -0.1 0.0" rpy="1.57 0 0" />
+      <geometry>
+        <cylinder radius="0.03" length="0.22" />
+      </geometry>
+    </collision> -->
+  </link>
+  <joint name="nero_joint2" type="revolute">
+    <origin xyz="0 0 0" rpy="1.5708 3.1415 0"/>
+    <parent link="nero_link1"/>
+    <child link="nero_link2"/>
+    <axis xyz="0 0 1"/>
+    <limit lower="-1.74" upper="1.74" effort="0" velocity="0"/>
+  </joint>
+
+  <!-- Nero Link3 -->
+  <link name="nero_link3">
+    <inertial>
+      <origin xyz="0.00014 0.00211 -0.04853" rpy="0 0 0"/>
+      <mass value="0.67"/>
+      <inertia ixx="0.00342528" ixy="0.0" ixz="0.0" iyy="0.0033924" iyz="0.0" izz="0.00026169"/>
+    </inertial>
+    <visual>
+      <origin xyz="0 0 0" rpy="0 0 0"/>
+      <geometry>
+        <mesh filename="../nero-meshes/dae/link3.dae"/>
+      </geometry>
+    </visual>
+    <!-- <collision>
+      <origin xyz="0 0 0" rpy="0 0 0"/>
+      <geometry>
+        <mesh filename="../nero-meshes/Link3.STL"/>
+      </geometry>
+    </collision> -->
+    <!-- <collision>
+      <origin xyz="0.0 0 -0.07" rpy="0 0 0" />
+      <geometry>
+        <cylinder radius="0.026" length="0.05" />
+      </geometry>
+    </collision> -->
+  </link>
+  <joint name="nero_joint3" type="revolute">
+    <origin xyz="0 -0.31 0" rpy="-1.5708 0 3.1416"/>
+    <parent link="nero_link2"/>
+    <child link="nero_link3"/>
+    <axis xyz="0 0 1"/>
+    <limit lower="-2.75" upper="2.75" effort="0" velocity="0"/>
+  </joint>
+
+  <!-- Nero Link4 -->
+  <link name="nero_link4">
+    <inertial>
+      <origin xyz="-0.00013 -0.05482 0.00132" rpy="0 0 0"/>
+      <mass value="0.41"/>
+      <inertia ixx="0.00031331" ixy="0.0" ixz="0.0" iyy="0.00013204" iyz="0.0" izz="0.0002393"/>
+    </inertial>
+    <visual>
+      <origin xyz="0 0 0" rpy="0 0 0"/>
+      <geometry>
+        <mesh filename="../nero-meshes/dae/link4.dae"/>
+      </geometry>
+    </visual>
+    <!-- <collision>
+      <origin xyz="0 0 0" rpy="0 0 0"/>
+      <geometry>
+        <mesh filename="../nero-meshes/Link4.STL"/>
+      </geometry>
+    </collision> -->
+    <!-- <collision>
+      <origin xyz="0.0 -0.04 0" rpy="1.57 0 0" />
+      <geometry>
+        <cylinder radius="0.024" length="0.12" />
+      </geometry>
+    </collision> -->
+  </link>
+  <joint name="nero_joint4" type="revolute">
+    <origin xyz="0 0 0" rpy="-1.5708 0 3.1416"/>
+    <parent link="nero_link3"/>
+    <child link="nero_link4"/>
+    <axis xyz="0 0 1"/>
+    <limit lower="-1.01" upper="2.14" effort="0" velocity="0"/>
+  </joint>
+
+  <!-- Nero Link5 -->
+  <link name="nero_link5">
+    <inertial>
+      <origin xyz="0.00303 0.00617 -0.11778" rpy="0 0 0"/>
+      <mass value="0.56"/>
+      <inertia ixx="0.0008249" ixy="0.0" ixz="0.0" iyy="0.00078548" iyz="0.0" izz="0.00021015"/>
+    </inertial>
+    <visual>
+      <origin xyz="0 0 0" rpy="0 0 0"/>
+      <geometry>
+        <mesh filename="../nero-meshes/dae/link5.dae"/>
+      </geometry>
+    </visual>
+    <!-- <collision>
+      <origin xyz="0 0 0" rpy="0 0 0"/>
+      <geometry>
+        <mesh filename="../nero-meshes/Link5.STL"/>
+      </geometry>
+    </collision> -->
+    <!-- <collision>
+      <origin xyz="0.0 0 -0.1" rpy="0 0 0" />
+      <geometry>
+        <cylinder radius="0.024" length="0.12" />
+      </geometry>
+    </collision> -->
+  </link>
+  <joint name="nero_joint5" type="revolute">
+    <origin xyz="0 -0.27001 0" rpy="1.5708 -1.5708 0"/>
+    <parent link="nero_link4"/>
+    <child link="nero_link5"/>
+    <axis xyz="0 0 1"/>
+    <limit lower="-2.75" upper="2.75" effort="0" velocity="0"/>
+  </joint>
+
+  <!-- Nero Link6 -->
+  <link name="nero_link6">
+    <inertial>
+      <origin xyz="0.00014 -0.0027 -0.00025" rpy="0 0 0"/>
+      <mass value="0.31"/>
+      <inertia ixx="0.00008181" ixy="0.0" ixz="0.0" iyy="0.00007176" iyz="0.0" izz="0.00007906"/>
+    </inertial>
+    <visual>
+      <origin xyz="0 0 0" rpy="0 0 0"/>
+      <geometry>
+        <mesh filename="../nero-meshes/dae/link6.dae"/>
+      </geometry>
+    </visual>
+    <!-- <collision>
+      <origin xyz="0 0 0" rpy="0 0 0"/>
+      <geometry>
+        <mesh filename="../nero-meshes/Link6.STL"/>
+      </geometry>
+    </collision> -->
+    <!-- <collision>
+      <origin xyz="0.0 0 0" rpy="0 1.57 1.57" />
+      <geometry>
+        <cylinder radius="0.024" length="0.04" />
+      </geometry>
+    </collision> -->
+  </link>
+  <joint name="nero_joint6" type="revolute">
+    <origin xyz="0 0 0" rpy="1.5708 -1.5708 0"/>
+    <parent link="nero_link5"/>
+    <child link="nero_link6"/>
+    <axis xyz="0 0 1"/>
+    <limit lower="-0.73" upper="0.95" effort="0" velocity="0"/>
+  </joint>
+
+  <!-- Nero Link7 -->
+  <link name="nero_link7">
+    <inertial>
+      <origin xyz="-0.00014000 -0.00010000 -0.00275000" rpy="0 0 0"/>
+      <mass value="0.1"/>
+      <inertia ixx="1.1000000000000001e-05" ixy="0" ixz="0" iyy="1.1000000000000001e-05" iyz="0" izz="1.9999999999999999e-05"/>
+    </inertial>
+    <visual>
+      <origin xyz="0 0 0" rpy="0 0 0"/>
+      <geometry>
+        <mesh filename="../nero-meshes/dae/link7.dae"/>
+      </geometry>
+    </visual>
+    <!-- <collision>
+      <origin xyz="0 0 0" rpy="0 0 0"/>
+      <geometry>
+        <mesh filename="../nero-meshes/Link7.STL"/>
+      </geometry>
+    </collision> -->
+  </link>
+  <joint name="nero_joint7" type="revolute">
+    <origin xyz="0 -0.0235 0" rpy="1.5708 0 0"/>
+    <parent link="nero_link6"/>
+    <child link="nero_link7"/>
+    <axis xyz="0 0 1"/>
+    <limit lower="-1.57" upper="1.57" effort="0" velocity="0"/>
+  </joint>
+
+  <!-- Nero末端执行器 -->
+  <link name="nero_end_effector"/>
+  <joint name="nero_end_effector_joint" type="fixed">
+    <origin xyz="0.00000000 0.00000000 -0.02350000" rpy="0 0 0"/>
+    <parent link="nero_link7"/>
+    <child link="nero_end_effector"/>
+  </joint>
+      <link name="end_effector">
+        <inertial>
+        <origin xyz="-0.01208 -0.00025 0.00032" rpy="0 0 0"/>
+        <mass value="0.05"/>
+        <inertia
+            ixx="2.697e-05"
+            ixy="0"
+            ixz="0"
+            iyy="4.311e-05"
+            iyz="0"
+            izz="2.479e-05"/>
+        </inertial>
+        <visual>
+            <origin xyz="0 0 0" rpy="-1.57 0 -1.57"/>
+            <geometry>
+                <mesh filename="../nero-meshes/stand_v2.dae"/>
+            </geometry>
+        </visual>
+        <!-- <collision>
+            <origin xyz="0 0 0" rpy="-1.57 0 -1.57"/>
+            <geometry>
+                <mesh filename="../nero-meshes/stand_v2.dae"/>
+            </geometry>
+        </collision> -->
+    </link>
+    <joint name="end_effector_joint" type="fixed">
+        <origin xyz="0.033 0.00000000 -0.02350000" rpy="0 0 0"/>
+        <parent link="nero_link7"/>
+        <child link="end_effector"/>
+    </joint>
+
+    <!-- ADD GRIPPER -->
+    <link name="gripper_base">
+        <inertial>
+        <origin
+            xyz="0.00103120214523473 0.0121761387587524 0.0315480874960164"
+            rpy="0 0 0" />
+        <mass value="0.195187143240719" />
+        <inertia
+            ixx="6.43790256535539E-05"
+            ixy="-1.2366166157046E-06"
+            ixz="1.97664606328472E-07"
+            iyy="0.000126146396374301"
+            iyz="2.41157078516408E-06"
+            izz="0.000154087076816444" />
+        </inertial>
+        <visual>
+        <origin xyz=" 0.00 0.0 0" rpy="0.0 0 0" />
+        <geometry>
+            <mesh filename="../nero-meshes/dae/gripper_base.dae"/>
+        </geometry>
+        <material name="">
+            <color rgba="0.792156862745098 0.819607843137255 0.933333333333333 1" />
+        </material>
+        </visual>
+        <!-- <collision>
+        <origin xyz="0 0 0.004" rpy="0 0 -1.57" />
+        <geometry>
+            <mesh filename="../nero-meshes/gripper_base.STL"/>
+        </geometry>
+        </collision> -->
+        <!-- <collision>
+      <origin xyz="0.0 0 0.03" rpy="0 0 1.57" />
+      <geometry>
+        <cylinder radius="0.024" length="0.05" />
+      </geometry>
+      </collision> -->
+      <!-- <collision>
+      <origin xyz="0 0 0.06" rpy="0 0 0" />
+      <geometry>
+        <box size="0.14 0.06 0.01" />
+      </geometry>
+    </collision> -->
+    </link>
+    <joint name="gripper" type="fixed">
+        <origin xyz="0.01 0 0" rpy="0 1.5708 0" />
+        <parent link="end_effector" />
+        <child link="gripper_base" />
+        <!-- <axis xyz="0 0 1" />
+        <limit lower="-3.14" upper="3.14" effort="100" velocity="3" /> -->
+    </joint>
+
+    <link name="nero_link8">
+        <inertial>
+        <origin
+            xyz="-0.000277778383727112 -0.0467673043650824 -0.00921029491873201"
+            rpy="0 0 0" />
+        <mass value="0.02648229234527" />
+        <inertia
+            ixx="9.99787479924589E-06"
+            ixy="-1.57548495096104E-07"
+            ixz="-2.71342775003487E-08"
+            iyy="6.1795212293655E-06"
+            iyz="-1.58939803580081E-06"
+            izz="1.42102717246564E-05" />
+        </inertial>
+        <visual>
+        <origin xyz="0 0 0" rpy="0 0 0" />
+        <geometry>
+            <mesh filename="../nero-meshes/dae/link8.dae" />
+        </geometry>
+        <material name="">
+            <color rgba="0.792156862745098 0.819607843137255 0.933333333333333 1" />
+        </material>
+        </visual>
+        <!-- <collision>
+        <origin xyz="-0.001 0 0.0003" rpy="0 3.14 0" />
+        <geometry>
+            <mesh filename="../nero-meshes/link8.STL" />
+        </geometry>
+        </collision> -->
+        <!-- <collision>
+      <origin xyz="0 -0.035 -0.01" rpy="0 0 0" />
+      <geometry>
+        <box size="0.06 0.07 0.02" />
+      </geometry>
+      </collision> -->
+    </link>
+    <joint name="nero_joint8" type="prismatic">
+        <origin xyz="0 0 0.13503" rpy="1.5708 0 1.5708" />
+        <parent link="gripper_base" />
+        <child link="nero_link8" />
+        <axis xyz="0 0 -1" />
+        <limit lower="0" upper="0.05" effort="100" velocity="1" />
+    </joint>
+
+    <link name="nero_link9">
+        <inertial>
+        <origin
+            xyz="0.000277816920932317 0.0467673824063769 -0.00921030054508036"
+            rpy="0 0 0" />
+        <mass value="0.0264822021416248" />
+        <inertia
+            ixx="9.99779119357223E-06"
+            ixy="-1.57542283433504E-07"
+            ixz="2.71367446701359E-08"
+            iyy="6.17952441557932E-06"
+            iyz="1.58939319453383E-06"
+            izz="1.4210192754512E-05" />
+        </inertial>
+        <visual>
+        <origin xyz="0 0 0" rpy="0 0 0" />
+        <geometry>
+            <mesh filename="../nero-meshes/dae/link9.dae" />
+        </geometry>
+        <material name="">
+            <color rgba="0.792156862745098 0.819607843137255 0.933333333333333 1" />
+        </material>
+        </visual>
+        <!-- <collision>
+        <origin xyz="-0.001 0 0.0003" rpy="3.14 0 0" />
+        <geometry>
+            <mesh filename="../nero-meshes/link9.STL" />
+        </geometry>
+        </collision> -->
+      <!-- <collision>
+      <origin xyz="0 0.035 -0.01" rpy="0 0 0" />
+      <geometry>
+        <box size="0.06 0.07 0.02" />
+      </geometry>
+      </collision> -->
+    </link>
+    <joint name="nero_joint9" type="prismatic">
+        <origin xyz="0 0 0.13503" rpy="-1.5708 0 1.5708" />
+        <parent link="gripper_base" />
+        <child link="nero_link9" />
+        <axis xyz="0 0 1" />
+        <limit lower="-0.05" upper="0" effort="100" velocity="1" />
+    </joint>
+</robot>
+
