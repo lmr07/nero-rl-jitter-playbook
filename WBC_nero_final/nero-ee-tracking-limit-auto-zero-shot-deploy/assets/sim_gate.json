@@ -1,0 +1,27 @@
+{
+  "checkpoint": "/home/lhao/A2-deploy_7_27/WBC_6_9_7_9_4_only_nero/logs/nero_ee_tracking_limit_v3/Oct27_23-25-59_limit_continuation_10000/model_10000.pt",
+  "checkpoint_sha256": "0291093d018b3ee4d1b5227f00c4227caf3ad0fea25c9c167aa4884fb2cceb78",
+  "sim_max_abs_target_minus_q_rad": [
+    0.08203697204589844,
+    0.21309295296669006,
+    0.11861589550971985,
+    0.2697044610977173,
+    0.08482778072357178,
+    0.08507567644119263,
+    0.09127378463745117
+  ],
+  "mean_error_m": 0.07155898226273712,
+  "hold_error_m": 0.08185620420299207,
+  "resets": 0,
+  "predictive_limit_events": 0,
+  "target_margin_violations": 0,
+  "max_abs_joint_velocity_rad_s": [
+    1.948061227798462,
+    1.1592366695404053,
+    0.7451105117797852,
+    0.7244381308555603,
+    1.5452436208724976,
+    1.6718683242797852,
+    1.2962994575500488
+  ]
+}

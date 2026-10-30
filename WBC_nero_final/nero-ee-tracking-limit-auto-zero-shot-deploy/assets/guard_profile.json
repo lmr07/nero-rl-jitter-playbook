@@ -1,0 +1,41 @@
+{
+  "feedback_envelope_rad": [
+    0.2,
+    0.3,
+    0.25,
+    0.36,
+    0.2,
+    0.2,
+    0.2
+  ],
+  "source": "single 20 s noise-free CPU PhysX rollout of the exact checkpoint; no hardware validation",
+  "sim_max_abs_target_minus_q_rad": [
+    0.08203697204589844,
+    0.21309295296669006,
+    0.11861589550971985,
+    0.2697044610977173,
+    0.08482778072357178,
+    0.08507567644119263,
+    0.09127378463745117
+  ],
+  "limit_predict_horizon_s": 0.15,
+  "limit_predict_margin_rad": 0.08,
+  "limit_predict_joints": [
+    1,
+    2,
+    3,
+    4,
+    5,
+    6,
+    7
+  ],
+  "target_position_margin_rad": [
+    0.16,
+    0.16,
+    0.16,
+    0.16,
+    0.16,
+    0.16,
+    0.3
+  ]
+}

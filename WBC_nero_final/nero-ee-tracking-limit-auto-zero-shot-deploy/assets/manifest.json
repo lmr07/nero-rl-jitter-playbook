@@ -1,0 +1,61 @@
+{
+  "source_run": "Oct27_23-25-59_limit_continuation_10000",
+  "checkpoint": 10000,
+  "source_checkpoint": "/tmp/WBC_nero_final_stage/logs/nero_ee_tracking_limit_v3/Oct27_23-25-59_limit_continuation_10000/model_10000.pt",
+  "training_actor_sha256": "7bcc6ca63f8d39a5995983d1c24cfd2c11f3376da1e6e304142104ef19df0877",
+  "training_pd_backend": "physx_position",
+  "training_physics_dt_s": 0.005,
+  "actor_shape": [
+    624,
+    7
+  ],
+  "frame_shape": [
+    16,
+    39
+  ],
+  "policy_hz": 50,
+  "action_mode": "absolute",
+  "target_position_margin_rad": [
+    0.16,
+    0.16,
+    0.16,
+    0.16,
+    0.16,
+    0.16,
+    0.3
+  ],
+  "control": "NeroFW.V121 MIT, SocketCAN BCM 20 ms, v_des=0, t_ff=0",
+  "startup_gains": {
+    "kp": [
+      1.769096842566818,
+      2.803365826343528,
+      4.292917438949484,
+      4.048447225123359,
+      35.77701114306786,
+      22.96755071762085,
+      29.73665768389295
+    ],
+    "kd": [
+      0.06199017502206735,
+      0.1075837623874799,
+      0.17605636609642372,
+      0.1533826550148886,
+      1.7768148889357307,
+      1.3480009723122108,
+      1.517175665895114
+    ]
+  },
+  "export_max_abs_error": 0.0,
+  "sha256": {
+    "checkpoint.pt": "0291093d018b3ee4d1b5227f00c4227caf3ad0fea25c9c167aa4884fb2cceb78",
+    "nero_config.json": "759118d4727b763707224d0d8169148da2836c5a950820ab2c7baa2b9e1b9851",
+    "nero-fixed.urdf": "0689ccb00ec4af7371fd59d431e6dbae9bf52ef2d94d9a69468fd0c1c4429537",
+    "identification_fit.json": "b7f0565b552f6091c926cab34c28f1d496c82ee1f7739037d05af973729642fe",
+    "sim_gate.json": "4661cbb6b506166cd09bd2b2b43b4bd78bb852877467377505623e72600614ac",
+    "gain_profile.json": "cf207dcf2f62d02af085a145d3644d249a2a7bbc7ae10dee6733c55de44b4404",
+    "guard_profile.json": "4736e56c0b60eb1218e22b39bbd9b79fe4ff35d4f2a48a747e8945236acf29dd",
+    "policy.pt": "dee4f2d05ff89062c4d78631163e9197cb437f32c8a6ff12310e3540d29b7140",
+    "export_reference.pt": "61b7951a13a6865dbcd76ea8b19db28753728176b44cfa6f4aafc50765af4552"
+  },
+  "identification_kind": "SDK current-derived torque multipliers; inverse mapping is experimental"
+}
